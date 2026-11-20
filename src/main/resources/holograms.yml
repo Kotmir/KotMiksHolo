@@ -1,0 +1,126 @@
+# ============================================================
+#  KotMiksHolo — голограммы
+#
+#  Позиция (x, y, z) — НИЖНЯЯ точка всей голограммы: строки стопкой растут вверх.
+#  Первая строка списка `lines` — самая верхняя.
+#
+#  Ключи голограммы (все, кроме world/x/y/z, необязательны — берутся из defaults в config.yml):
+#    enabled          true/false
+#    world, x, y, z, yaw, pitch
+#    view-distance    дистанция видимости (блоки)
+#    update-interval  обновление плейсхолдеров в тиках (0 = статичная)
+#    billboard        CENTER | VERTICAL | HORIZONTAL | FIXED
+#    shadow           тень текста
+#    see-through      виден сквозь блоки
+#    background       "#AARRGGBB" ("#00000000" прозрачный, "#40000000" полупрозрачный)
+#    alignment        CENTER | LEFT | RIGHT
+#    line-width       максимальная ширина строки (в пикселях)
+#    brightness       -1 (авто) или 0..15
+#    lines:           список блоков (каждый блок = один TextDisplay)
+#      - text:        строка (\n = перенос) или список строк
+#        scale:       число или [x, y, z]
+#        spacing:     отступ вниз до следующего блока (в блоках, по умолчанию 0.05)
+#        offset-y:    ручная подстройка высоты именно этого блока (по умолчанию 0)
+#
+#  Форматирование: MiniMessage (<#ffaa00>, <gradient:..>, <bold>), legacy (&a, &l), HEX (&#RRGGBB).
+#  Плейсхолдеры PlaceholderAPI (%player_name%) подставляются персонально для каждого игрока.
+# ============================================================
+
+holograms:
+
+  # ---- Пример 1: голограмма над NPC (отключена) ----
+  shop-npc-example:
+    enabled: false
+    world: world
+    x: 0.5
+    y: 66.5
+    z: 0.5
+    yaw: 0.0
+    pitch: 0.0
+    view-distance: 48
+    update-interval: 0
+    billboard: CENTER
+    shadow: true
+    see-through: false
+    background: "#00000000"
+    alignment: CENTER
+    line-width: 200
+    brightness: -1
+    lines:
+      - text: "<gradient:#ffaa00:#ffdd00><bold>Магазин</bold></gradient>"
+        scale: 1.6
+        spacing: 0.05
+      - text: "<white>ресурсов"
+        scale: 1.0
+
+  # ---- Пример 2: инфо-голограмма (отключена) ----
+  top-rewards-example:
+    enabled: false
+    world: world
+    x: 5.5
+    y: 66.5
+    z: 0.5
+    yaw: 0.0
+    pitch: 0.0
+    view-distance: 48
+    update-interval: 0
+    billboard: CENTER
+    shadow: true
+    see-through: false
+    background: "#00000000"
+    alignment: CENTER
+    line-width: 200
+    brightness: -1
+    lines:
+      - text: "<#00ffcc><bold>Награды за топ"
+        scale: 1.3
+        spacing: 0.05
+      - text: "<white>до <#00ffcc>300 рубинов <white>за первые\nместа в конце вайпа"
+        scale: 1.0
+
+  # ---- Бонус: персональные плейсхолдеры (нужен PlaceholderAPI; отключена) ----
+  welcome-example:
+    enabled: false
+    world: world
+    x: 10.5
+    y: 66.5
+    z: 0.5
+    update-interval: 20
+    lines:
+      - text: "<gradient:#00ffcc:#00aaff><bold>Привет, %player_name%!</bold></gradient>"
+        scale: 1.4
+      - text: "<gray>Онлайн: <white>%server_online%"
+        scale: 1.0
+
+  # ---- Бонус: онлайн в регионе WorldGuard (нужен WorldGuard; отключена) ----
+  # {wg_players:<регион>}          — игроков в регионе (по всем мирам)
+  # {wg_players:<мир>:<регион>}    — игроков в регионе конкретного мира
+  # Через PlaceholderAPI: %kotmiksholo_wg_players_<регион>%
+  # ВАЖНО: чтобы число обновлялось, update-interval должен быть > 0.
+  arena-online-example:
+    enabled: false
+    world: world
+    x: 15.5
+    y: 66.5
+    z: 0.5
+    update-interval: 20
+    lines:
+      - text: "<#ff5555><bold>Арена</bold>"
+        scale: 1.5
+      - text: "<white>Сейчас на арене: <#00ffcc>{wg_players:world:arena}"
+        scale: 1.0
+
+  # ---- Бонус: игроки с Simple Voice Chat (нужен PlaceholderAPI + расширение vcplaceholder; отключена) ----
+  # {svc_players} — число онлайн-игроков, у которых %vcplaceholder_installed% == true
+  voicechat-online-example:
+    enabled: false
+    world: world
+    x: 20.5
+    y: 66.5
+    z: 0.5
+    update-interval: 40
+    lines:
+      - text: "<#00ffcc><bold>Голосовой чат</bold>"
+        scale: 1.4
+      - text: "<white>С модом Simple Voice Chat: <#00ffcc>{svc_players}"
+        scale: 1.0
