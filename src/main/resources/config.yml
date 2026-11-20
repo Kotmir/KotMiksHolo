@@ -1,0 +1,71 @@
+# ============================================================
+#  KotMiksHolo — основной конфиг
+#  Сами голограммы лежат в holograms.yml
+# ============================================================
+
+settings:
+  # Как часто (в тиках) проверять, кто должен видеть голограмму (дистанция / чанк).
+  # 5 тиков = 4 раза в секунду. Больше значение — меньше нагрузка, но дольше появление.
+  visibility-check-interval: 5
+  # Использовать PlaceholderAPI (если установлен)
+  placeholderapi: true
+  # Текст первой строки при /holo create <id> без текста
+  default-text: "<white>Новая голограмма"
+
+# Значения по умолчанию для голограмм (используются, если ключ не указан в holograms.yml)
+defaults:
+  view-distance: 48
+  update-interval: 20
+  billboard: CENTER        # CENTER, VERTICAL, HORIZONTAL, FIXED
+  shadow: true
+  see-through: false
+  background: "#00000000"  # #AARRGGBB — прозрачный фон. #40000000 — полупрозрачный
+  alignment: CENTER        # CENTER, LEFT, RIGHT
+  line-width: 200
+  brightness: -1           # -1 = авто, 0..15 = фиксированная яркость
+
+advanced:
+  # Сдвиг индексов метаданных Display-сущностей. Нужен ТОЛЬКО если в какой-то будущей
+  # версии Minecraft Mojang добавит/удалит поля в Display и текст «поедет».
+  # Базовые индексы (1.20.2 – 1.21.x): scale=12, billboard=15, brightness=16,
+  # view-range=17, text=23, line-width=24, background=25, flags=27
+  metadata-index-shift: 0
+
+messages:
+  prefix: "<gradient:#00ffcc:#00aaff><bold>KotMiksHolo</bold></gradient> <dark_gray>» <reset>"
+  no-permission: "<red>У вас нет прав на эту команду."
+  player-only: "<red>Эта команда доступна только игрокам."
+  invalid-id: "<red>ID может содержать только латиницу, цифры, <white>_</white> и <white>-</white> (до 32 символов)."
+  exists: "<red>Голограмма <white><id></white> уже существует."
+  not-found: "<red>Голограмма <white><id></white> не найдена."
+  created: "<green>Голограмма <white><id></white> создана на вашей позиции."
+  deleted: "<green>Голограмма <white><id></white> удалена."
+  moved: "<green>Голограмма <white><id></white> перенесена на вашу позицию."
+  line-added: "<green>Строка добавлена в <white><id></white> (всего: <white><count></white>)."
+  line-set: "<green>Строка <white>#<index></white> в <white><id></white> изменена."
+  line-removed: "<green>Строка <white>#<index></white> удалена из <white><id></white>."
+  last-line: "<red>Нельзя удалить последнюю строку. Используйте <white>/holo delete <id></white>."
+  bad-index: "<red>Неверный индекс строки. Допустимо: <white>1..<max></white>."
+  bad-number: "<red>Введите корректное число (например <white>1.5</white>)."
+  scale-set: "<green>Масштаб <white><target></white> в <white><id></white> = <white><value></white>."
+  billboard-set: "<green>Режим поворота <white><id></white>: <white><mode></white>."
+  billboard-invalid: "<red>Допустимые режимы: <white>CENTER, VERTICAL, HORIZONTAL, FIXED</white>."
+  list-header: "<gradient:#00ffcc:#00aaff>Голограммы (<count>):"
+  list-empty: "<gray>Голограмм пока нет. Создайте: <white>/holo create <id> [текст]"
+  teleported: "<green>Телепортация к <white><id></white>."
+  world-missing: "<red>Мир <white><world></white> не загружен."
+  reloaded: "<green>Конфигурация перезагружена. Голограмм: <white><count></white>."
+  usage: "<red>Использование: <white><usage>"
+  help:
+    - "<gradient:#00ffcc:#00aaff><bold>KotMiksHolo</bold></gradient> <gray>— команды:"
+    - "<white>/holo create <id> [текст] <gray>— создать голограмму"
+    - "<white>/holo delete <id> <gray>— удалить"
+    - "<white>/holo movehere <id> <gray>— перенести к себе"
+    - "<white>/holo addline <id> <текст> <gray>— добавить строку"
+    - "<white>/holo setline <id> <№> <текст> <gray>— изменить строку"
+    - "<white>/holo removeline <id> <№> <gray>— удалить строку"
+    - "<white>/holo scale <id> <№|all> <число> <gray>— масштаб"
+    - "<white>/holo billboard <id> <режим> <gray>— режим поворота"
+    - "<white>/holo list <gray>— список (клик = телепорт)"
+    - "<white>/holo tp <id> <gray>— телепорт к голограмме"
+    - "<white>/holo reload <gray>— перезагрузка"
