@@ -1,0 +1,20 @@
+name: KotMiksHolo
+version: 1.0.0
+main: ru.kotmiks.holo.KotMiksHoloPlugin
+api-version: '1.21'
+description: Packet-based TextDisplay holograms (ProtocolLib) with per-player placeholders
+authors: [KotMiks]
+depend: [ProtocolLib]
+softdepend: [PlaceholderAPI]
+
+commands:
+  holo:
+    description: Управление голограммами KotMiksHolo
+    aliases: [kmholo, hologram]
+    usage: /<command> help
+    permission: kotmiksholo.admin
+
+permissions:
+  kotmiksholo.admin:
+    description: Полный доступ к управлению голограммами
+    default: op
